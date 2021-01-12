@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "industrialField": "",
+    "packageType": "ServerExtPrj",
+    "id": "ServerExtensionCSharp",
+    "version": "1.0.0.0",
+    "guid": "3a36a7eb-ebc9-43c3-aeea-b5d93d3f54ff",
+    "configurationName": "",
+    "platformName": "",
+    "creationTime": 1590393084,
+    "authors": "",
+    "owners": "",
+    "summary": "",
+    "licenseUrl": "",
+    "projectUrl": "",
+    "iconUrl": "",
+    "requireLicenseAcceptance": false,
+    "description": "",
+    "releaseNotes": "",
+    "copyright": "",
+    "tags": "",
+    "dependencies": [],
+    "references": []
+  },
+  "files": [
+    {
+      "target": "x64\\SQLite.Interop.dll"
+    },
+    {
+      "target": "x86\\SQLite.Interop.dll"
+    }
+  ],
+  "symbols": [],
+  "flags": {},
+  "fileformat": 1
+}

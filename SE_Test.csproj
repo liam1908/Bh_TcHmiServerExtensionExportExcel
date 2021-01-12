@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <OldToolsVersion>12.0</OldToolsVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Label="TwinCatHMI">
+    <TcHmiExtensionTypes>{5DF3DCF0-60A1-4102-985E-1810812D0E69}</TcHmiExtensionTypes>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TcHmiDirectory>$(registry:HKEY_LOCAL_MACHINE\Software\Beckhoff\TwinCAT3\3.1@InstallDir)\..\Functions\TE2000-HMI-Engineering</TcHmiDirectory>
+    <TcHmiDirectory Condition="'$(TcHmiDirectory)'==''">$(registry:HKEY_LOCAL_MACHINE\Software\Wow6432Node\Beckhoff\TwinCAT3\3.1@InstallDir)\..\Functions\TE2000-HMI-Engineering</TcHmiDirectory>
+    <TwinCATHmi_Tasks>$(TcHmiDirectory)\MSBuild\Beckhoff.TwinCAT.HMI.tasks</TwinCATHmi_Tasks>
+    <TwinCATHmi_Targets>$(TcHmiDirectory)\MSBuild\Beckhoff.TwinCAT.HMI.targets</TwinCATHmi_Targets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ProjectGuid>{98C5EBE2-A404-4C0E-AA9B-1E76B498418D}</ProjectGuid>
+    <ProjectName>SE_Test</ProjectName>
+    <TcHmiInstallationDir>$(TcHmiDirectory)\</TcHmiInstallationDir>
+    <TcHmiServerVersion>Latest</TcHmiServerVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SE_Test</RootNamespace>
+    <AssemblyName>SE_Test</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Label="TwinCatHMI">
+    <TcHmiTargetFramework>$(TargetFramework)</TcHmiTargetFramework>
+    <TcHmiTargetFramework Condition=" '$(TcHmiTargetFramework)' == '' ">net</TcHmiTargetFramework>
+    <TcHmiTargetFrameworkVersion>$(TargetFrameworkVersion)</TcHmiTargetFrameworkVersion>
+    <TcHmiPlatformTarget>$(PlatformTarget)</TcHmiPlatformTarget>
+    <TcHmiPlatformTarget Condition=" '$(TcHmiPlatformTarget)' == '' ">AnyCPU</TcHmiPlatformTarget>
+    <TcHmiConfiguration>$(Configuration)</TcHmiConfiguration>
+    <TcHmiServerApiVersion>1.0.0.0</TcHmiServerApiVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(TwinCATHmi_Tasks)" />
+  <Import Project="$(TwinCATHmi_Targets)" />
+  <PropertyGroup>
+    <PostBuildEventDependsOn />
+  </PropertyGroup>
+  <Target Name="PostBuildEvent" Condition="'$(PostBuildEvent)' != '' and ('$(RunPostBuildEvent)'=='Always' or '$(RunPostBuildEvent)'=='OnOutputUpdated')" DependsOnTargets="$(PostBuildEventDependsOn)">
+    <Exec WorkingDirectory="$(OutDir)" Command="$(PostBuildEvent)" />
+  </Target>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '12.0' Or '$(VisualStudioVersion)' == '14.0'">
+      <ItemGroup>
+        <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+      </ItemGroup>
+    </When>
+  </Choose>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="TcHmiSrvExtNet.Core">
+      <HintPath>$(TcHmiInstallationDir)Infrastructure\TcHmiServer\$(TcHmiServerVersion)\win-x64\API\1.0.0.0\TcHmiSrvExtNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.113.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.113.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SE_Test.cs" />
+    <Compile Include="Data.cs" />
+    <Compile Include="ExtensionErrorValue.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="x64\sqlite.interop.dll" />
+    <Content Include="x86\sqlite.interop.dll" />
+    <None Include="App.config" />
+    <None Include="config\SE_Test.Config.json" />
+    <None Include="config\SE_Test.Language.en.json" />
+    <None Include="config\SE_Test.Schema.json" />
+    <None Include="Manifest.json" />
+    <None Include="packages.config" />
+    <None Include="SE_Test.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>IF NOT EXIST "$(TargetDir)" ( mkdir "$(TargetDir)" )
+xcopy /y /r "$(ProjectDir)config\*.json" "$(TargetDir)"
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Target Name="BeforeBuild">
+    <TcHmiMSBuild.Extensions.TcHmiBuild TaskAction="UpdateConfigVersion" ProjectDirectory="$(ProjectDir)" />
+  </Target>
+  <Target Name="AfterBuild">
+    <TcHmiMSBuild.Extensions.TcHmiBuild TaskAction="AddKeyValue" Key="dotNetTargetFramework" Value="$(TcHmiTargetFramework)" ProjectDirectory="$(ProjectDir)" OutputPath="$(TargetDir)" />
+    <TcHmiMSBuild.Extensions.TcHmiBuild TaskAction="AddKeyValue" Key="dotNetTargetFrameworkVersion" Value="$(TcHmiTargetFrameworkVersion)" ProjectDirectory="$(ProjectDir)" OutputPath="$(TargetDir)" />
+    <TcHmiMSBuild.Extensions.TcHmiBuild TaskAction="AddKeyValue" Key="dotNetPlatformTarget" Value="$(TcHmiPlatformTarget)" ProjectDirectory="$(ProjectDir)" OutputPath="$(TargetDir)" />
+    <TcHmiMSBuild.Extensions.TcHmiBuild TaskAction="AddKeyValue" Key="dotNetConfiguration" Value="$(TcHmiConfiguration)" ProjectDirectory="$(ProjectDir)" OutputPath="$(TargetDir)" />
+  </Target>
+  <Target Name="AfterClean" AfterTargets="Clean">
+    <RemoveDir Directories="$(TargetDir)" />
+    <RemoveDir Directories="$(BaseIntermediateOutputPath)$(Configuration)" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties Manifest_1json__JSONSchema="https://json.schemastore.org/web-manifest-combined" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
