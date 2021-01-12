@@ -1,0 +1,70 @@
+{
+  "$schema": "ExtensionSettings.Schema.json",
+  "guid": "98c5ebe2-a404-4c0e-aa9b-1e76b498418d",
+  "version": "1.0.0.0",
+  "configVersion": "1.0.0.4",
+  "symbols": {
+    "RandomValue": {
+      "readValue": {
+        "allOf": [
+          {
+            "$ref": "tchmi:general#/definitions/Integer"
+          },
+          {
+            "readOnly": true
+          }
+        ]
+      },
+      "userGroups": [
+        "__SystemUsers"
+      ],
+      "hidden": false
+    },
+    "MaxRandom": {
+      "readValue": {
+        "$ref": "tchmi:general#/definitions/Integer"
+      },
+      "userGroups": [
+        "__SystemUsers"
+      ],
+      "hidden": false
+    },
+    "MaxRandomFromConfig": {
+      "readValue": {
+        "$ref": "tchmi:general#/definitions/Integer"
+      },
+      "userGroups": [
+        "__SystemUsers"
+      ],
+      "hidden": false
+    },
+    "BoolTestVar": {
+      "readValue": {
+        "$ref": "tchmi:general#/definitions/Boolean"
+      },
+      "hidden": false
+    },
+    "StatusVar": {
+      "readValue": {
+        "$ref": "tchmi:general#/definitions/String"
+      },
+      "hidden": false
+    },
+    "GettingDataStatus": {
+      "readValue": {
+        "$ref": "tchmi:general#/definitions/String"
+      },
+      "hidden": false
+    },
+    "ExportExcel": {
+      "readValue": {
+        "$ref": "tchmi:general#/definitions/Boolean"
+      },
+      "hidden": false
+    }
+  },
+  "dotNetTargetFramework": "net",
+  "dotNetTargetFrameworkVersion": "v4.8",
+  "dotNetPlatformTarget": "AnyCPU",
+  "dotNetConfiguration": "Release"
+}
